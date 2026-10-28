@@ -1,6 +1,6 @@
-# Sofa Planner module (`sofa_planner`) — skeleton
+# Sofa Planner module (`sofa_planner`) 
 
-A Django module for Levida Portal. First skeleton, not finished.
+A module for Levida Portal. First skeleton, not finished.
 
 > **This was built and tested in a small standalone test project (`test_project/`).
 > It is NOT verified Portal integration.**
