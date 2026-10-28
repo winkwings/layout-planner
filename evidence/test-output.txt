@@ -1,0 +1,66 @@
+Found 34 test(s).
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: auth, contenttypes, sessions, sofa_planner
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying sessions.0001_initial... OK
+  Applying sofa_planner.0001_initial... OK
+System check identified no issues (0 silenced).
+test_create_returns_401_json (sofa_planner.tests.test_views.AnonymousDeniedTests.test_create_returns_401_json) ... ok
+test_delete_redirects_and_keeps_record (sofa_planner.tests.test_views.AnonymousDeniedTests.test_delete_redirects_and_keeps_record) ... ok
+test_inactive_user_is_denied (sofa_planner.tests.test_views.AnonymousDeniedTests.test_inactive_user_is_denied) ... ok
+test_pages_redirect_to_sign_in (sofa_planner.tests.test_views.AnonymousDeniedTests.test_pages_redirect_to_sign_in) ... ok
+test_save_returns_401_json (sofa_planner.tests.test_views.AnonymousDeniedTests.test_save_returns_401_json) ... ok
+test_owner_can_delete (sofa_planner.tests.test_views.DeleteTests.test_owner_can_delete) ... ok
+test_user_without_module_permission_gets_403 (sofa_planner.tests.test_views.ModuleAccessTests.test_user_without_module_permission_gets_403) ... ok
+test_cannot_delete_other_users_layout (sofa_planner.tests.test_views.OtherUsersLayoutTests.test_cannot_delete_other_users_layout) ... ok
+test_cannot_open_other_users_layout (sofa_planner.tests.test_views.OtherUsersLayoutTests.test_cannot_open_other_users_layout) ... ok
+test_cannot_save_other_users_layout (sofa_planner.tests.test_views.OtherUsersLayoutTests.test_cannot_save_other_users_layout) ... ok
+test_list_shows_only_own_layouts (sofa_planner.tests.test_views.OtherUsersLayoutTests.test_list_shows_only_own_layouts) ... ok
+test_owner_in_body_is_ignored_on_create (sofa_planner.tests.test_views.OtherUsersLayoutTests.test_owner_in_body_is_ignored_on_create) ... ok
+test_bad_page_number_does_not_crash (sofa_planner.tests.test_views.PaginationTests.test_bad_page_number_does_not_crash) ... ok
+test_default_page_size_is_25 (sofa_planner.tests.test_views.PaginationTests.test_default_page_size_is_25) ... ok
+test_pages_are_not_cached (sofa_planner.tests.test_views.PrivacyHeaderTests.test_pages_are_not_cached) ... ok
+test_delete_requires_csrf_token (sofa_planner.tests.test_views.SaveMethodAndCsrfTests.test_delete_requires_csrf_token) ... ok
+test_save_rejects_get (sofa_planner.tests.test_views.SaveMethodAndCsrfTests.test_save_rejects_get) ... ok
+test_save_requires_csrf_token (sofa_planner.tests.test_views.SaveMethodAndCsrfTests.test_save_requires_csrf_token) ... ok
+test_save_works_with_csrf_token (sofa_planner.tests.test_views.SaveMethodAndCsrfTests.test_save_works_with_csrf_token) ... ok
+test_bad_unit (sofa_planner.tests.test_views.ValidationTests.test_bad_unit) ... ok
+test_empty_name (sofa_planner.tests.test_views.ValidationTests.test_empty_name) ... ok
+test_html_in_piece_name_rejected (sofa_planner.tests.test_views.ValidationTests.test_html_in_piece_name_rejected) ... ok
+test_html_in_sofa_model_name_rejected (sofa_planner.tests.test_views.ValidationTests.test_html_in_sofa_model_name_rejected) ... ok
+test_invalid_json (sofa_planner.tests.test_views.ValidationTests.test_invalid_json) ... ok
+test_piece_size_out_of_range (sofa_planner.tests.test_views.ValidationTests.test_piece_size_out_of_range) ... ok
+test_unknown_layout_key (sofa_planner.tests.test_views.ValidationTests.test_unknown_layout_key) ... ok
+test_good_version_saves_and_increments (sofa_planner.tests.test_views.VersionTests.test_good_version_saves_and_increments) ... ok
+test_identity_changed_is_rejected (sofa_planner.tests.test_views.VersionTests.test_identity_changed_is_rejected) ... ok
+test_missing_version_is_rejected (sofa_planner.tests.test_views.VersionTests.test_missing_version_is_rejected) ... ok
+test_stale_version_is_rejected (sofa_planner.tests.test_views.VersionTests.test_stale_version_is_rejected) ... ok
+test_files_found (sofa_planner.tests.test_csp_rules.CspRuleTests.test_files_found) ... ok
+test_planner_uses_storage_stub_not_localstorage (sofa_planner.tests.test_csp_rules.CspRuleTests.test_planner_uses_storage_stub_not_localstorage) ... ok
+test_scripts_build_no_inline_style_or_handlers (sofa_planner.tests.test_csp_rules.CspRuleTests.test_scripts_build_no_inline_style_or_handlers) ... ok
+test_templates_have_no_inline_code_or_style (sofa_planner.tests.test_csp_rules.CspRuleTests.test_templates_have_no_inline_code_or_style) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 7.284s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

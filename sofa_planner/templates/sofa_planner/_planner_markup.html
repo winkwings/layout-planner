@@ -1,0 +1,128 @@
+{% comment %}Planner markup. Copied AS IS from sofa-planner.html lines 648-773.
+Only change: footer dot inline style -> class "accent-dot" (INLINE_FIXES.md #1).{% endcomment %}
+  <header>
+    <div class="brand">
+      <div class="namepick" id="namepick">
+        <button class="name-btn" id="nameBtn" title="Choose or rename sofa">
+          <span class="name-current" id="nameCurrent">Alvric Sofa</span>
+          <span class="name-caret">▾</span>
+        </button>
+        <div class="name-menu" id="nameMenu" hidden>
+          <div class="name-list" id="nameList"></div>
+          <button class="name-add" id="nameAdd">+ Add name</button>
+        </div>
+      </div>
+      <span class="sub">Plan · cm</span>
+    </div>
+    <div class="readout">
+      <div><span class="num" id="ro-width">0</span> w</div>
+      <div class="div"></div>
+      <div><span class="num" id="ro-depth">0</span> d</div>
+      <div class="div"></div>
+      <div><span class="num" id="ro-count">0</span> sections</div>
+    </div>
+    <span class="fit-pill" id="fitPill" hidden></span>
+    <div class="spacer"></div>
+    <div class="unit-seg" id="unitSeg">
+      <button data-u="cm" class="active">cm</button>
+      <button data-u="in">in</button>
+    </div>
+    <div class="ctl">
+      <span>Zoom</span>
+      <button class="zoom-step" id="zoomOut" title="Zoom out" aria-label="Zoom out">−</button>
+      <input type="range" id="zoom" min="0.2" max="5" step="0.05" value="2.4" />
+      <button class="zoom-step" id="zoomIn" title="Zoom in" aria-label="Zoom in">+</button>
+    </div>
+    <button class="tool" id="fit">Fit</button>
+    <div class="roompick" id="roompick">
+      <button class="tool" id="roomBtn">Room <span class="pcaret">▾</span></button>
+      <div class="room-menu" id="roomMenu" hidden>
+        <div class="rm-toggle">
+          <span class="rm-t">Show room</span>
+          <button class="switch" id="roomSwitch" role="switch" aria-checked="false" title="Toggle room outline"><span class="knob"></span></button>
+        </div>
+        <div class="rm-unitrow">
+          <span class="rm-ulabel">Units</span>
+          <div class="unit-seg rm-unit-seg" id="roomUnitSeg">
+            <button data-ru="ft" class="active">ft</button>
+            <button data-ru="in">in</button>
+            <button data-ru="cm">cm</button>
+          </div>
+        </div>
+        <div class="rm-fields">
+          <label><span class="ln">Width</span><input type="number" id="room-w" min="1" step="0.1" /><span class="ru-label">ft</span></label>
+          <label><span class="ln">Depth</span><input type="number" id="room-d" min="1" step="0.1" /><span class="ru-label">ft</span></label>
+        </div>
+        <div class="rm-presets">
+          <span class="rm-plabel">Presets</span>
+          <div class="rm-prow" id="roomPresets"></div>
+        </div>
+        <div class="rm-openings">
+          <span class="rm-plabel">Openings</span>
+          <div class="rm-prow">
+            <button type="button" class="rm-op" id="addDoor">＋ Door</button>
+            <button type="button" class="rm-op" id="addWindow">＋ Window</button>
+          </div>
+        </div>
+        <div class="rm-hint">Drag a <b>corner dot</b> inward to cut an L-shape. Drag a <b>door / window</b> along its wall to position it; drag its end dots to resize. <button type="button" id="roomResetCorners" class="rm-reset">Reset corners</button></div>
+      </div>
+    </div>
+    <div class="printpick" id="printpick">
+      <button class="tool" id="print">Print <span class="pcaret">▾</span></button>
+      <div class="print-menu" id="printMenu" hidden>
+        <button data-mode="plan"><span class="pm-t">Plan sheet</span><span class="pm-s">Drawing &amp; parts list</span></button>
+        <button data-mode="form"><span class="pm-t">Custom order form</span><span class="pm-s">Levida general order form</span></button>
+      </div>
+    </div>
+    <button class="tool danger" id="clear">Clear</button>
+  </header>
+
+  <main id="main">
+    <button class="palette-toggle" id="paletteToggle" title="Hide pieces panel" aria-label="Toggle pieces panel">
+      <span class="chev">‹</span>
+    </button>
+    <aside id="palette">
+      <p class="palette-hint">Click a piece to drop it onto the plan — new pieces chain to the right and snap to the back wall. Drag any piece to rearrange; edges snap to neighbours.</p>
+    </aside>
+
+    <div class="canvas-wrap" id="canvasWrap">
+      <div id="world">
+        <div class="backwall" id="backwall"><span class="label">Back wall</span></div>
+        <div class="empty" id="empty">
+          <div class="box">
+            <div class="big">Build your sectional</div>
+            <div class="sm">Pick arms, seats &amp; modules from the left</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="inspector" id="inspector" hidden>
+        <div class="insp-head">
+          <span class="insp-dot" id="insp-dot"></span>
+          <span class="insp-name" id="insp-name">—</span>
+        </div>
+        <div class="insp-fields">
+          <label>W <input type="number" id="insp-w" min="2" max="160" step="0.1" /><span class="u-label">cm</span></label>
+          <label>D <input type="number" id="insp-d" min="2" max="160" step="0.1" /><span class="u-label">cm</span></label>
+          <label>Angle <input type="number" id="insp-ang" min="0" max="360" step="1" /><span class="deg-label">°</span></label>
+        </div>
+        <div class="insp-actions">
+          <button class="tool" id="insp-rot">⟳ 90°</button>
+          <button class="tool" id="insp-dup">Duplicate</button>
+          <button class="tool danger" id="insp-del">Delete</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>Drag to move</span>
+    <span>Select + <kbd>⌫</kbd> to delete</span>
+    <span><kbd>R</kbd> rotate 90°</span>
+    <span>Drag <span class="accent-dot">●</span> handle to spin</span>
+    <span><kbd>D</kbd> duplicate</span>
+    <span id="foot-note"></span>
+  </footer>
+
+  <div id="printSheet"></div>
+  <div id="rotBadge" class="rot-badge-float" hidden></div>

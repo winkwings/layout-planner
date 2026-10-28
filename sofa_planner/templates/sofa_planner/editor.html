@@ -1,0 +1,49 @@
+{% extends "levida_placeholder/base.html" %}{# TODO-PORTAL: real base template name #}
+{% load static %}
+{% comment %}
+  Task page: the planner editor.
+  - No inline script blocks and no inline style attributes (CSP). Data goes in data-* attributes
+    and a json_script block (type="application/json" is data, not code).
+  - Script order matters: csp-helpers.js and storage-stub.js before sofa-planner.js.
+    "defer" keeps that order and runs them after the page is parsed.
+{% endcomment %}
+
+{% block title %}{% if layout %}{{ layout.name }}{% else %}New layout{% endif %} · Sofa Planner{% endblock %}
+{% block body_class %}sp-editor-page{% endblock %}
+{% block content_class %}lv-content--fill{% endblock %}
+
+{% block module_css %}
+  <link rel="stylesheet" href="{% static 'sofa_planner/css/sofa-planner.css' %}">
+  <link rel="stylesheet" href="{% static 'sofa_planner/css/editor-page.css' %}">
+{% endblock %}
+{% block module_js %}
+  <script src="{% static 'sofa_planner/js/csp-helpers.js' %}" defer></script>
+  <script src="{% static 'sofa_planner/js/storage-stub.js' %}" defer></script>
+  <script src="{% static 'sofa_planner/js/sofa-planner.js' %}" defer></script>
+{% endblock %}
+
+{% block page_title %}{% if layout %}{{ layout.name }}{% else %}New layout{% endif %}{% endblock %}
+{% block page_description %}Sofa Planner · changes are saved only when you press “Save layout”.{% endblock %}
+{% block page_actions %}
+  <form id="sp-saveform" class="sp-saveform" novalidate>
+    <label for="sp-layout-name">Layout name</label>
+    <input id="sp-layout-name" name="name" type="text" maxlength="120" required
+           value="{% if layout %}{{ layout.name }}{% endif %}">
+    <button id="sp-save" type="submit">Save layout</button>
+    <a class="lv-button" href="{% url 'sofa_planner:layout_list' %}">Back to list</a>
+  </form>
+  <p id="sp-status" class="sp-status" role="status" aria-live="polite"></p>
+{% endblock %}
+
+{% block content %}
+  <div id="sp-editor" class="sp-editor"
+       data-save-url="{{ save_url }}"
+       data-version="{{ version }}"
+       data-opened-as="{{ opened_as }}"
+       data-layout-id="{% if layout %}{{ layout.pk }}{% else %}new{% endif %}"
+       data-sofa-model-name="{% if layout %}{{ layout.sofa_model_name }}{% endif %}">
+    {% csrf_token %}
+    {{ layout_data|json_script:"sp-initial-layout" }}
+    {% include "sofa_planner/_planner_markup.html" %}
+  </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+/* PLACEHOLDER styles for the stand-in Levida layout.  TODO-PORTAL
+   The real Portal uses Tailwind CSS 4.3.3 + daisyUI 5.7.47 and its own tokens.
+   Kept very plain on purpose. Do not copy into the Portal. */
+:root { color-scheme: light dark; --lv-bg: #fff; --lv-fg: #1a1a1a; --lv-line: #d0d0d0; --lv-muted: #555; }
+@media (prefers-color-scheme: dark) {
+  :root { --lv-bg: #17181a; --lv-fg: #ececec; --lv-line: #3a3a3a; --lv-muted: #aaa; }
+}
+body { margin: 0; font-family: system-ui, sans-serif; background: var(--lv-bg); color: var(--lv-fg); }
+.lv-topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 8px 16px; border-bottom: 1px solid var(--lv-line); font-size: 14px; flex-wrap: wrap; }
+.lv-brand { font-weight: 700; }
+.lv-tag { font-size: 11px; font-weight: 600; padding: 2px 6px; border: 1px dashed currentColor; margin-left: 6px; }
+.lv-account { display: flex; gap: 8px; align-items: center; }
+.lv-inline { display: inline; margin: 0; }
+.lv-pagehead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+  padding: 12px 16px; flex-wrap: wrap; border-bottom: 1px solid var(--lv-line); }
+.lv-title { margin: 0; font-size: 20px; }
+.lv-description { margin: 2px 0 0; color: var(--lv-muted); font-size: 14px; }
+.lv-actions { display: flex; flex-direction: column; gap: 4px; }
+.lv-messages { padding: 0 16px; }
+.lv-message { margin: 8px 0; padding: 8px 12px; border: 1px solid var(--lv-line); }
+.lv-content { padding: 16px; }
+/* Scoped to the placeholder chrome and list page only, so module pages
+   (the planner) are not restyled. The real shared layout must do the same. */
+.lv-topbar button, .lv-pagehead button, .lv-table button, .lv-form button, .lv-button {
+  min-height: 44px; min-width: 44px; padding: 0 14px; font: inherit; cursor: pointer; }
+a.lv-button { display: inline-flex; align-items: center; }
+:focus-visible { outline: 3px solid #2a6df4; outline-offset: 2px; }
+
+/* List page */
+.lv-table-wrap { overflow-x: auto; }
+.lv-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.lv-table th, .lv-table td { text-align: left; padding: 8px; border-bottom: 1px solid var(--lv-line); vertical-align: middle; }
+.lv-row-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.lv-pagination { display: flex; gap: 12px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+.lv-empty { color: var(--lv-muted); }
+.lv-form p { margin: 0 0 12px; }
+.lv-form input { min-height: 44px; font: inherit; }
+/* Visually hidden, still read by screen readers */
+.lv-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

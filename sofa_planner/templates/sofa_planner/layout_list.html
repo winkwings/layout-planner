@@ -1,0 +1,56 @@
+{% extends "levida_placeholder/base.html" %}{# TODO-PORTAL: real base template name #}
+{% load static %}
+{% comment %}Browse page: the current user's saved layouts, 25 per page.{% endcomment %}
+
+{% block title %}Sofa Planner{% endblock %}
+{% block module_js %}<script src="{% static 'sofa_planner/js/list-page.js' %}" defer></script>{% endblock %}
+
+{% block page_title %}Sofa Planner{% endblock %}
+{% block page_description %}Your saved sofa layouts.{% endblock %}
+{% block page_actions %}
+  <a class="lv-button" href="{% url 'sofa_planner:layout_new' %}">New layout</a>
+{% endblock %}
+
+{% block content %}
+  {% if page_obj.object_list %}
+    <div class="lv-table-wrap">
+      <table class="lv-table">
+        <caption class="lv-description">
+          Showing {{ page_obj.start_index }}–{{ page_obj.end_index }} of {{ page_obj.paginator.count }}
+        </caption>
+        <thead>
+          <tr><th scope="col">Name</th><th scope="col">Sofa model</th><th scope="col">Last updated</th><th scope="col">Version</th><th scope="col">Actions</th></tr>
+        </thead>
+        <tbody>
+          {% for layout in page_obj %}
+            <tr>
+              <td><a href="{% url 'sofa_planner:layout_edit' layout.pk %}">{{ layout.name }}</a></td>
+              <td>{{ layout.sofa_model_name|default:"—" }}</td>
+              {# Shown in America/Toronto because TIME_ZONE is set and USE_TZ=True #}
+              <td><time datetime="{{ layout.updated_at|date:'c' }}">{{ layout.updated_at|date:"Y-m-d H:i" }}</time></td>
+              <td>{{ layout.version }}</td>
+              <td class="lv-row-actions">
+                <a class="lv-button" href="{% url 'sofa_planner:layout_edit' layout.pk %}">Open<span class="lv-sr"> {{ layout.name }}</span></a>
+                <form method="post" action="{% url 'sofa_planner:layout_delete' layout.pk %}"
+                      data-confirm="Delete layout &quot;{{ layout.name }}&quot;? This cannot be undone." class="lv-inline">
+                  {% csrf_token %}
+                  <button type="submit" aria-label="Delete {{ layout.name }}">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if page_obj.has_other_pages %}
+      <nav class="lv-pagination" aria-label="Pages">
+        {% if page_obj.has_previous %}<a class="lv-button" href="?page={{ page_obj.previous_page_number }}">Previous</a>{% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}<a class="lv-button" href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <p class="lv-empty">You have no saved layouts yet.</p>
+  {% endif %}
+{% endblock %}

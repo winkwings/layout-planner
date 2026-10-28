@@ -1,0 +1,13 @@
+{% extends "levida_placeholder/base.html" %}
+{% comment %}TODO-PORTAL: stand-in for the Portal's central sign-in page. Test project only.{% endcomment %}
+{% block title %}Sign in{% endblock %}
+{% block page_title %}Sign in (test project only){% endblock %}
+{% block page_description %}Use a synthetic test account from the README.{% endblock %}
+{% block content %}
+  <form method="post" class="lv-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit">Sign in</button>
+  </form>
+{% endblock %}

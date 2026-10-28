@@ -1,0 +1,59 @@
+{% load static %}<!DOCTYPE html>
+{% comment %}
+  ================================================================
+  PLACEHOLDER — NOT THE REAL LEVIDA LAYOUT.   TODO-PORTAL
+  ================================================================
+  This file only stands in for the shared Levida base layout so the
+  module can be tested alone. The real layout (header, branding, app
+  switcher, account menu, sign-out, theme, footer, Tailwind/daisyUI)
+  belongs to the Portal. Do NOT copy this file into the Portal.
+
+  The block names below are GUESSES for the "shared slots" the
+  rulebook mentions (title, description, navigation, primary actions,
+  content). Rename them to the real slot names once known.
+
+  No <header>/<main>/<footer> tags on purpose: the copied planner CSS
+  styles those tags globally (see KNOWN_LIMITATIONS.md).
+{% endcomment %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} · Levida Portal (placeholder)</title>
+  <link rel="stylesheet" href="{% static 'levida_placeholder/base.css' %}">
+  {% block module_css %}{% endblock %}
+  {% block module_js %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <div class="lv-topbar" role="banner">
+    <span class="lv-brand">Levida Portal <span class="lv-tag">PLACEHOLDER LAYOUT</span></span>
+    {% if user.is_authenticated %}
+      <span class="lv-account">
+        Signed in as {{ user.get_username }}
+        <form method="post" action="{% url 'logout' %}" class="lv-inline">
+          {% csrf_token %}
+          <button type="submit">Sign out</button>
+        </form>
+      </span>
+    {% endif %}
+  </div>
+
+  <div class="lv-pagehead">
+    <div>
+      <h1 class="lv-title">{% block page_title %}{% endblock %}</h1>
+      <p class="lv-description">{% block page_description %}{% endblock %}</p>
+    </div>
+    <div class="lv-actions">{% block page_actions %}{% endblock %}</div>
+  </div>
+
+  {% if messages %}
+    <div class="lv-messages" role="status">
+      {% for message in messages %}<p class="lv-message">{{ message }}</p>{% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="lv-content {% block content_class %}{% endblock %}" role="main">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

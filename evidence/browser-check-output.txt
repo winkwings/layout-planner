@@ -1,0 +1,24 @@
+{"origPieces":2,"editor320HorizontalScroll":true}
+PASS list page shows own layout
+PASS list page hides other user layout
+PASS server layout loaded: 4 pieces
+PASS pieces are positioned (not stacked at 0,0)
+PASS dimension line got its inline width via CSSOM
+PASS no unconverted data-style left
+PASS sofa model name shown in picker
+PASS unsaved status shown
+PASS save succeeds -> version 2
+PASS reload shows saved 5 pieces
+PASS stale tab gets conflict message
+PASS new layout created
+PASS URL switched to edit URL
+PASS print: planner toolbar hidden
+PASS editor: no CSP violations
+PASS editor: no JS errors
+PASS tabB: no CSP violations
+PASS tabB: no JS errors
+PASS new: no CSP violations
+PASS new: no JS errors
+PASS mobile: no CSP violations
+PASS mobile: no JS errors
+22/22 passed

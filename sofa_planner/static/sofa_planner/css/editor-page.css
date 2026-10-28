@@ -1,0 +1,30 @@
+/* Editor page glue: fits the planner inside the PLACEHOLDER Levida layout.
+ * TODO-PORTAL: re-check all of this against the real shared layout.
+ * Uses only placeholder class names (lv-*) and module class names (sp-*). */
+
+/* The planner CSS makes <body> a full-height flex column.
+   These rules let the content area fill the rest of the screen. */
+.lv-content.lv-content--fill { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; padding: 0; }
+.sp-editor { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; }
+
+/* Save form in the page-actions slot */
+.sp-saveform { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.sp-saveform label { font-size: 14px; }
+.sp-saveform input { min-height: 44px; padding: 0 10px; font: inherit; width: 16rem; max-width: 100%; }
+.sp-saveform button, .sp-saveform a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; }
+
+/* Save status messages (data-state is set by storage-stub.js) */
+.sp-status { margin: 4px 0 0; font-size: 14px; min-height: 1.4em; }
+.sp-status[data-state="success"] { color: #1d6b2f; }
+.sp-status[data-state="error"]   { color: #a1260d; font-weight: 600; }
+.sp-status[data-state="warn"]    { color: #7a5200; }
+.sp-status[data-state="pending"] { color: #444; }
+
+/* Print: the original planner CSS hides "body > header / main / footer".
+   Inside the layout those are no longer direct children of <body>, so hide
+   them (and the placeholder chrome) here. */
+@media print {
+  .lv-topbar, .lv-pagehead, .lv-messages,
+  .sp-editor > header, .sp-editor > main, .sp-editor > footer { display: none !important; }
+  .lv-content.lv-content--fill { display: block; }
+}
