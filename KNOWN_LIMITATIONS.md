@@ -5,7 +5,8 @@ Delivery state (rulebook §18): *implemented + tested locally*. Not integrated, 
 
 ## Not built yet (skeleton only)
 
-- The planner was **copied, not rebuilt**. Logic is the same as `sofa-planner.html`.
+- The planner was **copied, not rebuilt**. Logic is the same as `sofa-planner.html`,
+  except the floor drawing (see "UI redesign" below).
 - Uses a **placeholder base layout**, not the real Levida layout, Tailwind or daisyUI.
 - Uses **placeholder permissions** (`permissions.py`). No Portal roles.
 - **Save is manual.** The "Save layout" button calls the server. Nothing saves automatically.
@@ -22,6 +23,19 @@ Delivery state (rulebook §18): *implemented + tested locally*. Not integrated, 
 - If a saved sofa model name is not in the browser's name list and the user never edited
   that list, the picker falls back to the first default name.
 
+## UI redesign (2026-10-28)
+
+- Planner colours now read the Portal's **daisyUI 5 theme variables** (`--color-base-100`,
+  `--color-base-200`, `--color-base-300`, `--color-base-content`, `--color-primary`,
+  `--color-primary-content`). Outside the Portal, neutral fallback colours are used.
+  **Not checked against the real Levida theme yet** (no access).
+- Text is larger and darker, with no monospace font and no tiny all-caps labels.
+  Toolbar and inspector controls are 44 px.
+- The wood-plank floor is replaced by a floor-plan grid: 1 m lines, plus 10 cm lines when zoomed in.
+- **Dark theme not checked.** Sofa piece colours are still fixed light colours set by the
+  planner script, and some small parts still use white backgrounds.
+- The print sheet styles were not changed.
+
 ## Problems copied from the original planner (not fixed, on purpose)
 
 - **Inspector panel scrolls away.** It is placed inside the scrolling canvas. After the canvas
@@ -34,6 +48,7 @@ Delivery state (rulebook §18): *implemented + tested locally*. Not integrated, 
 - **`innerHTML` with user text** (piece names, sofa name). Server now rejects `<` and `>` in these.
   Final fix: build those parts with `textContent`.
 - **Not mobile-ready.** At 320 px the editor scrolls sideways (`evidence/module-editor-320px.png`).
+  At about 1000 px the toolbar wraps onto two rows.
 - **Accessibility gaps** in the planner: drag-only actions, small touch targets,
   icon buttons without names (for example ✎ and × in the name menu), mouse-only rotation handle.
 - Uses `document.execCommand` (old browser API) when renaming.

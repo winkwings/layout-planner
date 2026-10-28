@@ -1,4 +1,4 @@
-{"origPieces":2,"editor320HorizontalScroll":true}
+{"origPieces":2,"editor320HorizontalScroll":false}
 PASS list page shows own layout
 PASS list page hides other user layout
 PASS server layout loaded: 4 pieces

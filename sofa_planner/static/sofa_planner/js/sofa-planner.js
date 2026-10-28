@@ -1,5 +1,6 @@
-/* Sofa Planner logic. Copied AS IS from sofa-planner.html lines 776-2311.
- * Only mechanical changes:
+/* Sofa Planner logic. Copied from sofa-planner.html lines 776-2311.
+ * Logic unchanged except the floor drawing in setWorldSize() (UI redesign:
+ * wood planks -> floor-plan grid). Other changes are mechanical:
  *  1. style="..." inside HTML strings -> data-style="..." (42 places), and
  *     SofaPlannerCSP.applyDataStyles(...) after each innerHTML that uses them (11 places).
  *     Reason: the Portal CSP blocks inline style attributes. See INLINE_FIXES.md.
@@ -426,17 +427,18 @@
     needH = Math.max(needH, wrap.clientHeight/scale);
     world.style.width  = (needW*scale)+"px";
     world.style.height = (needH*scale)+"px";
-    // warm wood-plank floor
-    const plank = Math.max(12, 24*scale);   // plank height in px (~24cm planks)
-    world.style.backgroundColor = "var(--wood-a)";
-    world.style.backgroundImage =
-      // soft directional grain
-      `repeating-linear-gradient(90deg, var(--wood-grain) 0 1px, transparent 1px 6px),`+
-      // plank seams (thin shadow lines between rows)
-      `repeating-linear-gradient(0deg, transparent 0 ${plank-1.5}px, var(--wood-seam) ${plank-1.5}px ${plank}px),`+
-      // alternating plank tone every other row
-      `repeating-linear-gradient(0deg, var(--wood-a) 0 ${plank}px, var(--wood-b) ${plank}px ${plank*2}px)`;
-    world.style.backgroundSize = "auto, auto, auto";
+    // floor-plan grid (UI redesign; replaces the wood planks): 1 m lines, plus 10 cm
+    // lines when zoomed in enough to see them. Lines start at the room corner.
+    const m = 100*scale, dm = 10*scale;     // px per metre / per 10 cm
+    const major = `linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px),`+
+                  `linear-gradient(0deg, var(--grid-strong) 1px, transparent 1px)`;
+    const minor = `,linear-gradient(90deg, var(--grid) 1px, transparent 1px),`+
+                  `linear-gradient(0deg, var(--grid) 1px, transparent 1px)`;
+    const showMinor = dm >= 16;             // hide 10 cm lines when they would be too dense
+    world.style.backgroundColor = "var(--canvas)";
+    world.style.backgroundImage = major + (showMinor ? minor : "");
+    world.style.backgroundSize = `${m}px ${m}px, ${m}px ${m}px` + (showMinor ? `, ${dm}px ${dm}px, ${dm}px ${dm}px` : "");
+    world.style.backgroundPosition = `${ROOM_X*scale}px ${ROOM_Y*scale}px`;
   }
 
   function render(){

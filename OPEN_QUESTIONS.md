@@ -46,3 +46,5 @@ Questions to ask the company. I did **not** guess these. Current behaviour is in
 18. **Session checks.** Is there a shared JS helper for "session expired / user changed"
     that module pages must use?
 19. **Can a module ship its own CSS file?** (Planner canvas cannot be built from daisyUI alone.)
+20. **Levida theme.** Which daisyUI theme / colours / font does the Portal use? The planner now
+    reads the standard daisyUI 5 colour variables. Please confirm these are the right ones.

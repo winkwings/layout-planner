@@ -60,7 +60,7 @@ test_scripts_build_no_inline_style_or_handlers (sofa_planner.tests.test_csp_rule
 test_templates_have_no_inline_code_or_style (sofa_planner.tests.test_csp_rules.CspRuleTests.test_templates_have_no_inline_code_or_style) ... ok
 
 ----------------------------------------------------------------------
-Ran 34 tests in 7.284s
+Ran 34 tests in 7.310s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

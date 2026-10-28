@@ -4,7 +4,8 @@ Only mechanical edits. Every edit is counted and asserted.
 Usage (from the project folder):
     python3 -I tools/convert_planner.py path/to/sofa-planner.html sofa_planner
 (The original sofa-planner.html is the company's file and is not in this repo.)
-Already run once. Re-running overwrites the copied CSS/JS/markup files.
+Already run once. Do NOT re-run: the CSS/JS have since been edited (UI redesign),
+and re-running would overwrite those edits.
 """
 import sys
 from pathlib import Path
